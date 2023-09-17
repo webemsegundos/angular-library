@@ -4,9 +4,11 @@ Libraries for Angular 15+ / Ionic 6+
 
 
 # wes-mask-br
-npm install wes-mask-br
-
 Numeric mask for inputs
+
+* npm install wes-mask-br
+
+See documentation at [https://www.npmjs.com/package/wes-mask-br](https://www.npmjs.com/package/wes-mask-br)
 
 ## Changelog
 
@@ -19,9 +21,11 @@ Numeric mask for inputs
 
 
 # wes-redactor
-npm install wes-redactor
-
 Return RedactorX object
+
+* npm install wes-redactor
+
+See documentation at [https://www.npmjs.com/package/wes-redactor](https://www.npmjs.com/package/wes-redactor)
 
 ## Changelog
 
