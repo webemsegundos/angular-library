@@ -6,7 +6,7 @@ return custom mask in input for Angular / Ionic
 - Node: 10.7.0
 - npm 6.4.0
 - ionic 6
-- Angular CLI: 15
+- Angular CLI: 16
 
 # install
 
@@ -209,6 +209,8 @@ npm publish
 ```
 
 # Changelog
+### 0.1.16
+- Updated to accept Angular 15+
 
 ### 0.0.10
 - Names changed to WeSMaskBR not conflict with previous package forked
