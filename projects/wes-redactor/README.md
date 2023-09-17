@@ -15,14 +15,35 @@ npm install wes-redactor --save -E
 
 # Usage
 
+### ANGULAR.JSON
+
+```
+"styles": [
+    ...
+    "src/libs/redactorx/redactorx.min.css",
+    "src/libs/redactorx/redactorplugins.scss",
+    "src/styles.scss"
+],
+"scripts": [
+    {
+      "input": "src/libs/redactorx/redactorx.min.js",
+      "inject": true,
+      "bundleName": "RedactorX"
+    }
+]
+```
+
+### Component
+
 ```javascript
-import {WeSRedactor, WeSRedactorModule} from "redactor";
+import {WeSRedactor, WeSRedactorModule} from "wes-redactor";
 
 @Component({
 	...
+  standalone: true,
 	imports: [CommonModule, WeSRedactorModule, ReactiveFormsModule, FormsModule],
-  	providers: [WeSRedactor],
-  	...
+  providers: [WeSRedactor],
+  ...
 })
 
 ...
@@ -57,8 +78,11 @@ ngAfterViewInit(): void {
 
 * change$ - Subscriptor to access each change in content
 
+If you are using RedactorX plugins, you will need to load them in your Component before to add on Config.
+
+
 
 # Changelog
 
-### 0.1.18
+### 0.1.20
 - Updated to accept Angular 15+
