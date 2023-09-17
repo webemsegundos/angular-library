@@ -26,6 +26,9 @@
     "paths": {
       "wes-mask-br": [
         "dist/wes-mask-br"
+      ],
+      "wes-redactor": [
+        "dist/wes-redactor"
       ]
     }
   },

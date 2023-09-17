@@ -1,24 +1,64 @@
-# Redactor
+# wes-redactor
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
+return RedactorX for Angular
 
-## Code scaffolding
+# Work at
+- Node: 10.7.0
+- npm 6.4.0
+- Angular CLI: 15+
 
-Run `ng generate component component-name --project redactor` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project redactor`.
-> Note: Don't forget to add `--project redactor` or else it will be added to the default project in your `angular.json` file. 
+# install
 
-## Build
+```sh
+npm install wes-redactor --save -E
+```
 
-Run `ng build redactor` to build the project. The build artifacts will be stored in the `dist/` directory.
+# Usage
 
-## Publishing
+```javascript
+import {WeSRedactor, WeSRedactorModule} from "redactor";
 
-After building your library with `ng build redactor`, go to the dist folder `cd dist/redactor` and run `npm publish`.
+@Component({
+	...
+	imports: [CommonModule, WeSRedactorModule, ReactiveFormsModule, FormsModule],
+  	providers: [WeSRedactor],
+  	...
+})
 
-## Running unit tests
+...
 
-Run `ng test redactor` to execute the unit tests via [Karma](https://karma-runner.github.io).
+protected editor: WeSRedactor = inject(WeSRedactor);
 
-## Further help
+ngAfterViewInit(): void {
+    this.editor.init('id_of_textarea_element', {
+      editor: {
+        minHeight: '350px',
+        maxHeight: '450px',
+      },
+      content: this.fieldTexto,
+    }).change$.pipe(takeUntil(this.destroyed$)).subscribe({
+      next: (value: any) => {
+        // console.log('conteudo editor alterado', value);
+        this.fieldTexto = value;
+      }
+    });
+  }
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### HTML
+
+```html
+<textarea id="meueditor"></textarea>
+```
+
+### DOCUMENTATION
+
+* init('id_of_element', {original object for RedactorX config})
+
+* change$ - Subscriptor to access each change in content
+
+
+# Changelog
+
+### 0.1.18
+- Updated to accept Angular 15+

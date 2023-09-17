@@ -11,7 +11,7 @@ return custom mask in input for Angular / Ionic
 # install
 
 ```sh
-npm install @webemsegundos/wes-mask-br --save -E
+npm install wes-mask-br --save -E
 ```
 
 # Usage

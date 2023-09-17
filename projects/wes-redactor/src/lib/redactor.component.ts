@@ -52,7 +52,7 @@ export class WeSRedactor {
     this.editor('#' + id, {
       ...config,
       subscribe: {
-        'editor.change': function (html) {
+        'editor.change': function (html: any) {
           it.change$.next(html?.params?.html);
         }
       }
