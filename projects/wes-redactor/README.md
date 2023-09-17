@@ -17,20 +17,26 @@ npm install wes-redactor --save -E
 
 ### ANGULAR.JSON
 
+Place your licensed RedactorX script and styles in /src/libs/redactorx
+
 ```
-"styles": [
-    ...
-    "src/libs/redactorx/redactorx.min.css",
-    "src/libs/redactorx/redactorplugins.scss",
-    "src/styles.scss"
-],
-"scripts": [
-    {
-      "input": "src/libs/redactorx/redactorx.min.js",
-      "inject": true,
-      "bundleName": "RedactorX"
-    }
-]
+{
+  ...  
+  "styles": [
+      ...
+      "src/libs/redactorx/redactorx.min.css",
+      "src/libs/redactorx/redactorplugins.scss",
+      "src/styles.scss"
+  ],
+  "scripts": [
+      {
+        "input": "src/libs/redactorx/redactorx.min.js",
+        "inject": true,
+        "bundleName": "RedactorX"
+      }
+  ]
+  ...
+}
 ```
 
 ### Component
@@ -39,37 +45,69 @@ npm install wes-redactor --save -E
 import {WeSRedactor, WeSRedactorModule} from "wes-redactor";
 
 @Component({
-	...
+  ...
   standalone: true,
-	imports: [CommonModule, WeSRedactorModule, ReactiveFormsModule, FormsModule],
-  providers: [WeSRedactor],
+  imports: [CommonModule, WeSRedactorModule, FormsModule],
   ...
 })
 
 ...
 
-protected editor: WeSRedactor = inject(WeSRedactor);
+protected editorOne: WeSRedactor = new WeSRedactor;
+protected editorTwo: WeSRedactor = new WeSRedactor;
+
+protected fieldTextOne: string = '';
+protected fieldTextTwo: string = '';
+
+protected destroyed$: Subject<unknown> = new Subject();
 
 ngAfterViewInit(): void {
-    this.editor.init('id_of_textarea_element', {
+    
+    // First Element
+    this.editorOne.init('id_of_first_textarea_element', {
       editor: {
         minHeight: '350px',
         maxHeight: '450px',
       },
-      content: this.fieldTexto,
+      content: this.fieldTextOne,
     }).change$.pipe(takeUntil(this.destroyed$)).subscribe({
       next: (value: any) => {
-        // console.log('conteudo editor alterado', value);
-        this.fieldTexto = value;
+        // console.log('new content', value);
+        this.fieldTextOne = value; // update your field/model/control
       }
     });
-  }
+
+
+    // Second Element
+    this.editorTwo.init('id_of_second_textarea_element', {
+      editor: {
+        minHeight: '300px',
+        maxHeight: '400px',
+      },
+      content: this.fieldTextTwo,
+    }).change$.pipe(takeUntil(this.destroyed$)).subscribe({
+      next: (value: any) => {
+        // console.log('new content', value);
+        this.fieldTextTwo = value; // update your field/model/control
+      }
+    });
+
+
+}
+
+ngOnDestroy(): void {
+  this.destroyed$.next(true);
+}
+
 ```
 
 ### HTML
 
 ```html
-<textarea id="meueditor"></textarea>
+<textarea id="id_of_first_textarea_element"></textarea>
+...
+<textarea id="id_of_second_textarea_element"></textarea>
+
 ```
 
 ### DOCUMENTATION
@@ -84,5 +122,8 @@ If you are using RedactorX plugins, you will need to load them in your Component
 
 # Changelog
 
-### 0.1.20
+### 0.1.23
+- Updated documentation to multiple Redactor instances
+
+### 0.1.21
 - Updated to accept Angular 15+

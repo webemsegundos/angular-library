@@ -1,6 +1,6 @@
 {
   "name": "wes-redactor",
-  "version": "0.1.20",
+  "version": "0.1.23",
   "peerDependencies": {
     "@angular/common": ">=15.2.0",
     "@angular/core": ">=15.2.0"
